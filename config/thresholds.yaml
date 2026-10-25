@@ -1,0 +1,33 @@
+# Pre-registered analysis thresholds. Fixing these before data collection is what
+# keeps the gap measurement honest; nothing downstream may inline its own cutoff.
+
+# Hardware ground-truth criteria, one per failure class.
+functional:
+  min_pass_rate: 0.95
+
+timing:
+  max_deadline_miss_rate: 0.01
+  max_jitter_us: 200.0
+
+concurrency:
+  max_race_events: 0
+
+resource_soak:
+  required_hours: 4.0
+
+peripheral_edge:
+  max_edge_failures: 0
+
+# The optimistic pre-deployment verdict. A program is "predicted reliable" when the
+# cheap oracles give it a clean bill: tests mostly pass, no error-severity findings,
+# emulation runs, and emulated jitter (when measured) stays within bound.
+oracle_rule:
+  min_pass_rate: 0.90
+  forbidden_severities: [error]
+  require_emulation_functional: true
+  max_emulation_jitter_us: 300.0
+
+analysis:
+  alpha: 0.05
+  bootstrap_iterations: 2000
+  bootstrap_seed: 20250101

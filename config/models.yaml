@@ -1,0 +1,20 @@
+# Pinned model registry. One open-weight entry is required so a run is
+# reproducible from locally archived weights, not only a vendor endpoint.
+models:
+  - id: oss-20b
+    provider: local
+    api_model_string: oss-20b-instruct
+    date: "2025-08-05"
+    open_weight: true
+
+  - id: vendor-a-large
+    provider: anthropic
+    api_model_string: claude-sonnet-5
+    date: "2025-09-29"
+    open_weight: false
+
+  - id: vendor-b-large
+    provider: openai
+    api_model_string: gpt-x-code-2025-07
+    date: "2025-07-18"
+    open_weight: false

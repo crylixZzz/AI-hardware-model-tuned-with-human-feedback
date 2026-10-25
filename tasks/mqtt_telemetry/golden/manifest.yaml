@@ -1,0 +1,22 @@
+class: resource_soak
+
+reference:
+  name: reference
+  source: reference.cpp
+  expected_outcome: censored_survived   # reached the required window with no failure
+  injection: { clean: true }
+
+planted:
+  - name: heap_leak_fast
+    source: planted_heap_leak.cpp
+    expected_outcome: fail
+    defect: Per-publish malloc with no free; heap exhausted ~1 h, before the 4 h window.
+    injection: { time_to_failure_s: 3600.0, observation_window_s: 14400.0 }
+
+  # Not a defect in the program: a run cut short before the required window. The
+  # instrument must label this unknown, never a clean pass. This guards the censoring rule.
+  - name: truncated_run_unknown
+    source: reference.cpp
+    expected_outcome: censored_unknown
+    defect: Observation truncated at 1000 s; required window not reached, label unknown.
+    injection: { time_to_failure_s: 1000.0, observation_window_s: 1000.0 }

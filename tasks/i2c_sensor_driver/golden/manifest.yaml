@@ -1,0 +1,14 @@
+class: peripheral_edge
+
+reference:
+  name: reference
+  source: reference.cpp
+  expected_outcome: pass
+  injection: { clean: true }
+
+planted:
+  - name: ignores_nack_and_range
+    source: planted_edge.cpp
+    expected_outcome: fail
+    defect: Transfer error ignored and register range unchecked; edge inputs mishandled.
+    injection: { edge_failures: 3, edge_total: 16 }

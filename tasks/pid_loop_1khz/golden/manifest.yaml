@@ -1,0 +1,14 @@
+class: timing
+
+reference:
+  name: reference
+  source: reference.cpp
+  expected_outcome: pass
+  injection: { clean: true }
+
+planted:
+  - name: deadline_overrun_60us
+    source: planted_deadline_overrun.cpp
+    expected_outcome: fail
+    defect: Data-dependent transcendental loop overruns the 1 ms step, jitter ~260 us.
+    injection: { jitter_us: 260.0, deadline_miss_rate: 0.03 }
