@@ -1,0 +1,14 @@
+class: functional
+
+reference:
+  name: reference
+  source: reference.cpp
+  expected_outcome: pass
+  injection: { clean: true }
+
+planted:
+  - name: buffer_overflow_longrun
+    source: planted_overflow.cpp
+    expected_outcome: fail
+    defect: Missing capacity check and 0xFF run split; long non-zero runs corrupt output.
+    injection: { device_pass_rate: 0.5 }
