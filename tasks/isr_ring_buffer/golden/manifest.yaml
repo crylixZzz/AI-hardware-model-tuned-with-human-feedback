@@ -1,0 +1,14 @@
+class: concurrency
+
+reference:
+  name: reference
+  source: reference.cpp
+  expected_outcome: pass
+  injection: { clean: true }
+
+planted:
+  - name: shared_count_race
+    source: planted_race.cpp
+    expected_outcome: fail
+    defect: Non-atomic shared count updated from ISR and main; contention loses updates.
+    injection: { race_events: 7 }

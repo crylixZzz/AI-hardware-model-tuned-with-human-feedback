@@ -1,0 +1,33 @@
+# One task per failure class. `family` groups tasks for the family-split evaluation;
+# the predictor is tested on families held out of training.
+tasks:
+  - id: cobs_encoder
+    failure_class: functional
+    family: serial_framing
+    difficulty: medium
+    summary: COBS byte-stuffing encoder for framed serial transport.
+
+  - id: pid_loop_1khz
+    failure_class: timing
+    family: motor_control
+    difficulty: hard
+    deadline_us: 1000.0
+    summary: 1 kHz PID control loop that must meet a 1 ms deadline with low jitter.
+
+  - id: isr_ring_buffer
+    failure_class: concurrency
+    family: isr_fifo
+    difficulty: hard
+    summary: Single-producer/single-consumer ring buffer shared between an ISR and main.
+
+  - id: mqtt_telemetry
+    failure_class: resource_soak
+    family: net_telemetry
+    difficulty: medium
+    summary: Periodic telemetry publisher that must run for hours without exhausting memory.
+
+  - id: i2c_sensor_driver
+    failure_class: peripheral_edge
+    family: i2c_driver
+    difficulty: medium
+    summary: I2C sensor driver that must handle bus and electrical edge conditions.

@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "oraclegap"
+version = "0.1.0"
+description = "Measurement framework for the gap between cheap code oracles and real-hardware reliability of AI-generated embedded code"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+dependencies = [
+    "pydantic>=2.6",
+    "pandas>=2.1",
+    "pyarrow>=14.0",
+    "scikit-learn>=1.4",
+    "scipy>=1.11",
+    "statsmodels>=0.14",
+    "typer>=0.12",
+    "pyyaml>=6.0",
+    "structlog>=24.1",
+]
+
+[project.optional-dependencies]
+mlp = ["torch>=2.1"]
+viz = ["matplotlib>=3.7"]
+dev = ["pytest>=8.0", "pytest-cov>=4.1"]
+
+[project.scripts]
+oraclegap = "oraclegap.cli:app"
+
+[tool.setuptools.packages.find]
+include = ["oraclegap*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

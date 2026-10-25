@@ -1,0 +1,34 @@
+board:
+  id: esp32
+  fallback: rp2040
+
+generation:
+  k: 20
+  seed: 1234
+  models_registry: config/models.yaml
+
+emulation:
+  # qemu: Espressif QEMU fork (functional + limited timing).
+  # null: functional-only, no timing modelling.
+  # mock: seeded synthetic, for hardware-free runs and CI.
+  backend: mock
+
+timing_capture:
+  # sigrok: fx2hw logic analyzer via sigrok-cli.
+  # counter-mcu: independent timestamping microcontroller.
+  # mock: seeded synthetic captures.
+  backend: mock
+
+paths:
+  dataset: data/dataset
+  artifacts: data/artifacts
+  runs: data/runs
+
+thresholds_file: config/thresholds.yaml
+
+tool_versions:
+  platformio: "6.1.15"
+  qemu-system-xtensa: "8.2.0-esp"
+  cppcheck: "2.13.0"
+  clang-tidy: "17.0.6"
+  sigrok-cli: "0.7.2"
